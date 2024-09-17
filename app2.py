@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 # MongoDB connection
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb+srv://vignaramtejtelagarapu:vzNsqoKpAzHRdN9B@amile.auexv.mongodb.net/?retryWrites=true&w=majority&appName=Amile')
 db = client['amile']
 job_collection = db['internships']
 
