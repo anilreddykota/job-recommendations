@@ -2,8 +2,6 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
 import pandas as pd
 import requests
 
@@ -68,26 +66,10 @@ def recommend_jobs(user_skills, top_n=5):
     recommended_jobs = job_df.iloc[top_indices][columns_to_return]
     return recommended_jobs
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(train_model, IntervalTrigger(minutes=30))  # Train the model every 30 minutes
-scheduler.start()
+
 
 train_model()
-# @app.route('/scrape',methods=['GET'])
-# def scrape():
 
-#         url = "https://linkedin-data-scraper.p.rapidapi.com/company_insights"
-
-#         querystring = {"link":"https://www.linkedin.com/company/google"}
-
-#         headers = {
-# 	        "x-rapidapi-key": "39ee2ff0femsh87c2169491d5dfbp17049fjsne81b437ca161",
-# 	    "x-rapidapi-host": "linkedin-data-scraper.p.rapidapi.com"
-#         }
-
-#         response = requests.get(url, headers=headers, params=querystring)
-#         return response.json()
-    
 @app.route('/recommend', methods=['POST'])
 def recommend():
     user_skills = request.json.get('skills')
