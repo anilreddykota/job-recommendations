@@ -105,7 +105,8 @@ def train():
 if __name__ == "__main__":
     print("Job Recommendation System is running. Press Ctrl+C to exit.")
     try:
-        app.run(debug=True,port=9000)
+         port = int(os.environ.get("PORT", 5000))
+         app.run(host='0.0.0.0', port=port)
     except KeyboardInterrupt:
         print("Shutting down...")
     finally:
