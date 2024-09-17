@@ -1,0 +1,4 @@
+pymongo
+apscheduler
+sentence-transformers
+pandas
