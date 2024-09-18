@@ -5,13 +5,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 from bson import ObjectId
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 # MongoDB connection
 client = MongoClient('mongodb+srv://vignaramtejtelagarapu:vzNsqoKpAzHRdN9B@amile.auexv.mongodb.net/?retryWrites=true&w=majority&appName=Amile')
-db = client['amile']
+db = client['test']
 job_collection = db['internships']
 
 job_df = None
@@ -113,7 +114,7 @@ if __name__ == "__main__":
     print("Job Recommendation System is running. Press Ctrl+C to exit.")
     try:
         port = int(os.environ.get("PORT", 5000))
-        app.run(host='0.0.0.0', port=port)
+        app.run(debug=True,port=port)
     except KeyboardInterrupt:
         print("Shutting down...")
     finally:
